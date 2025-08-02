@@ -13,7 +13,7 @@ services:
 
   keycloak:
     build:
-      context: .
+      context: ./keycloak
       dockerfile: Dockerfile.keycloak
     environment:
       KEYCLOAK_ADMIN: admin
@@ -29,7 +29,7 @@ services:
     depends_on:
       - keycloak-db
     volumes:
-      - ./keycloak-imports/realm-export.json:/opt/keycloak/data/import/realm-export.json
+      - ./keycloak/keycloak-imports/realm-export.json:/opt/keycloak/data/import/realm-export.json
       - keycloak-db-data:/var/lib/postgresql/data
 
 volumes:
