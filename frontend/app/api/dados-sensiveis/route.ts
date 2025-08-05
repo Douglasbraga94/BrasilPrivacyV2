@@ -12,6 +12,7 @@ function getTokenFromRequest(request: NextRequest): string | undefined {
 
 // GET: Lista todos os dados sensíveis
 export async function GET(request: NextRequest) {
+  console.log("[API][dados-sensiveis][GET] Iniciando GET de dados-sensiveis");
   const token = getTokenFromRequest(request)
   const { valid } = validateKeycloakJWT(token)
   if (!valid) {
