@@ -22,8 +22,8 @@ export async function GET(request: NextRequest) {
     const dados = await sql`SELECT id, codigo, nome as "tipoDados" FROM dados_sensiveis ORDER BY id`
     return NextResponse.json(dados)
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: "Erro ao buscar dados sensíveis" }, { status: 500 })
+    console.error("Erro ao buscar dados sensíveis:", error)
+    return NextResponse.json({ error: "Erro ao buscar dados sensíveis", details: error instanceof Error ? error.stack || error.message : String(error) }, { status: 500 })
   }
 }
 
@@ -55,8 +55,8 @@ export async function POST(request: NextRequest) {
     `
     return NextResponse.json(result[0])
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: "Erro ao criar dado sensível" }, { status: 500 })
+    console.error("Erro ao criar dado sensível:", error)
+    return NextResponse.json({ error: "Erro ao criar dado sensível", details: error instanceof Error ? error.stack || error.message : String(error) }, { status: 500 })
   }
 }
 
@@ -83,7 +83,8 @@ export async function PUT(request: NextRequest) {
     }
     return NextResponse.json(result[0])
   } catch (error) {
-    return NextResponse.json({ error: "Erro ao atualizar dado sensível" }, { status: 500 })
+    console.error("Erro ao atualizar dado sensível:", error)
+    return NextResponse.json({ error: "Erro ao atualizar dado sensível", details: error instanceof Error ? error.stack || error.message : String(error) }, { status: 500 })
   }
 }
 
@@ -109,6 +110,7 @@ export async function DELETE(request: NextRequest) {
     }
     return NextResponse.json({ message: "Dado sensível removido com sucesso" })
   } catch (error) {
-    return NextResponse.json({ error: "Erro ao remover dado sensível" }, { status: 500 })
+    console.error("Erro ao remover dado sensível:", error)
+    return NextResponse.json({ error: "Erro ao remover dado sensível", details: error instanceof Error ? error.stack || error.message : String(error) }, { status: 500 })
   }
 }
