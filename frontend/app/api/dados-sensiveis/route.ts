@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const dados = await sql`SELECT id, codigo, nome as "tipoDados" FROM dados_sensiveis ORDER BY id`
+    const dados = await sql`SELECT * FROM dados_sensiveis ORDER BY id`
     return NextResponse.json(dados)
   } catch (error) {
     console.error("Erro ao buscar dados sensíveis:", error)
