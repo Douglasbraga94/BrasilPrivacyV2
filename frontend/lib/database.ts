@@ -9,8 +9,13 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL })
 export async function sql(strings: TemplateStringsArray, ...values: any[]) {
   const text = strings.reduce((acc, str, i) => acc + str + (values[i] !== undefined ? `$${i + 1}` : ""), "")
   const params = values
-  const result = await pool.query(text, params)
-  return result.rows
+  try {
+    const result = await pool.query(text, params)
+    return result.rows
+  } catch (error) {
+    console.error("Erro no banco de dados:", error, { text, params })
+    throw error
+  }
 }
 
 // Tipos TypeScript para as tabelas
