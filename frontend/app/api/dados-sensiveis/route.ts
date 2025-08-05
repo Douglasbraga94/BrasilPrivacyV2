@@ -22,6 +22,7 @@ export async function GET(request: NextRequest) {
     const dados = await sql`SELECT id, codigo, nome as "tipoDados" FROM dados_sensiveis ORDER BY id`
     return NextResponse.json(dados)
   } catch (error) {
+    console.error(error)
     return NextResponse.json({ error: "Erro ao buscar dados sensíveis" }, { status: 500 })
   }
 }
@@ -54,6 +55,7 @@ export async function POST(request: NextRequest) {
     `
     return NextResponse.json(result[0])
   } catch (error) {
+    console.error(error)
     return NextResponse.json({ error: "Erro ao criar dado sensível" }, { status: 500 })
   }
 }
