@@ -1,5 +1,7 @@
 import { Pool } from "pg"
 
+console.log("[LIB][database] Arquivo carregado")
+
 if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL must be set")
 }
