@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { sql } from "@/lib/database"
 import { validateKeycloakJWT } from "@/lib/utils/keycloak-jwt"
 
+console.log("[API][dados-sensiveis] Arquivo carregado");
+
 function getTokenFromRequest(request: NextRequest): string | undefined {
   const authHeader = request.headers.get("authorization")
   if (!authHeader) return undefined
